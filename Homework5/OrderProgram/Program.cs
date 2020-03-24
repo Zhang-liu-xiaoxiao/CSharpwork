@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 
 namespace OrderProgram 
 {
-    class Order:IComparable<Order>
+    [Serializable]
+    public class Order:IComparable<Order>
     {
+       
         public int OrderNumber { get; set; }
         public String ClientName { get; set; }
 
         public String DateTime { get; set; }
         public Double OrderAmount
-        {
-            get
-            {
-                return OrderAmount;
-            }
-            set {
-                double sum=0;
-                OrderItems.ForEach(s => sum += s.OrderAmount);
-                OrderAmount = sum;
-            }
-        }
+        { get; set; }
         public List<OrderItem> OrderItems { get; set; }//gaicheng List
+
+        public Order()
+        {
+        }
 
         public Order(int orderNumber, string clientName,String datetime,List<OrderItem> tempOrderItems)
         {
@@ -31,7 +29,10 @@ namespace OrderProgram
             this.ClientName = clientName;
             this.DateTime = datetime;
             OrderItems = tempOrderItems;
-
+            double sumAmount = 0;
+            foreach (OrderItem orderItem in tempOrderItems)
+                sumAmount += orderItem.OrderAmount;
+            OrderAmount = sumAmount;
         }
 
 
@@ -56,13 +57,17 @@ namespace OrderProgram
         }
     }
 
-    class OrderItem
+    public class OrderItem
     {
         public Double OrderAmount { get; set; }
 
         public String MerchandiseName { get; set; }
         public int MerchandiseAmount { get; set; }
         public int OrderItemNumber { get; set; }
+
+        public OrderItem()
+        {
+        }
 
         public override string ToString()
         {
@@ -92,7 +97,7 @@ namespace OrderProgram
 
     }
 
-    class OrderService
+    public class OrderService
     {
         List<Order> orderList = new List<Order>();
 
@@ -118,6 +123,24 @@ namespace OrderProgram
             orderList.Clear();
         }
 
+        public void Export(string path)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Order>));
+            using(FileStream fileStream = new FileStream(path,FileMode.Create))
+            {
+                xmlSerializer.Serialize(fileStream, orderList);
+            }
+        }
+
+
+        public void Import(string path)
+        {
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Order>));
+            using (FileStream fileStream = new FileStream(path, FileMode.Open))
+            {
+                orderList = (List<Order>)xmlSerializer.Deserialize(fileStream);
+            }
+        }
         public IEnumerable<Order> SelectAllOrder()
         {
             return orderList;
@@ -162,6 +185,7 @@ namespace OrderProgram
 
             Order order1 = orderService.SelectByNumber(1);
             Console.WriteLine(order1.ToString());
+            orderService.Export("C:/temp/2.xml");
 
         }
     }
