@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,11 +19,13 @@ namespace OrderApp {
 
     public Goods GoodsItem { get; set; }
 
+        [ForeignKey("GoodsItemId")]
+        public string GoodsItemId { get; set; }
     public String GoodsName { get => GoodsItem!=null? this.GoodsItem.Name:""; }
 
     public double UnitPrice { get => GoodsItem != null ? this.GoodsItem.Price : 0.0; }
 
-
+    public string OrderId { get; set; }
     public uint Quantity { get; set; }
 
     public OrderItem() { }

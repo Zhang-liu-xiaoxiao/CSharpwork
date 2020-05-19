@@ -10,23 +10,20 @@ namespace OrderApp {
   /**
    * The service class to manage orders
    * */
-  public class OrderService {
+  public static class OrderService {
 
-    //the order list
-
-
-    public OrderService() {
-    }
+        //the order list
 
 
-    public List<Order> GetOrders()
+
+        public static List<Order> GetOrders()
     {
         using(var db = new MyContext())
         {
             return AllOrders(db).ToList();
         }
     }
-    public Order GetOrder(String id)
+        public static Order GetOrder(String id)
     {
         using (var db = new MyContext())
         {
@@ -34,7 +31,7 @@ namespace OrderApp {
         }
     }
 
-    public void AddOrder(Order order) {
+        public static void AddOrder(Order order) {
         try
         {
             using (var db = new MyContext())
@@ -49,7 +46,7 @@ namespace OrderApp {
         }
     }
 
-    public void RemoveOrder(String orderId) {
+        public static void RemoveOrder(String orderId) {
         try
         {
             using (var db = new MyContext())
@@ -68,9 +65,9 @@ namespace OrderApp {
 
             Console.WriteLine("删除订单错误");
         }
-    }   
+    }
 
-    public List<Order> QueryOrdersByGoodsName(string goodsName) {
+        public static List<Order> QueryOrdersByGoodsName(string goodsName) {
             using (var db = new MyContext())
             {
                 var query = db.Orders
@@ -80,7 +77,7 @@ namespace OrderApp {
             }
     }
 
-    public List<Order> QueryOrdersByCustomerName(string customerName) {
+        public static List<Order> QueryOrdersByCustomerName(string customerName) {
             using (var db = new MyContext())
             {
                 return db.Orders
@@ -90,7 +87,7 @@ namespace OrderApp {
             } 
     }
 
-    public void UpdateOrder(Order newOrder) {
+        public static void UpdateOrder(Order newOrder) {
       Order oldOrder = GetOrder(newOrder.OrderId);
       if(oldOrder==null)
         Console.WriteLine("修改错误，订单不存在");
@@ -109,7 +106,7 @@ namespace OrderApp {
 
 
 
-    public void Sort(Func<Order, Order, int> func) {
+        public static void Sort(Func<Order, Order, int> func) {
             
             using (var db = new MyContext())
             {
@@ -123,14 +120,14 @@ namespace OrderApp {
                       .Include("Customer");
         }
 
-    public void Export(String fileName) {
+        public static void Export(String fileName) {
       XmlSerializer xs = new XmlSerializer(typeof(List<Order>));
       using (FileStream fs = new FileStream(fileName, FileMode.Create)) {
         xs.Serialize(fs, GetOrders());
       }
     }
 
-    public void Import(string path) {
+        public static void Import(string path) {
       XmlSerializer xs = new XmlSerializer(typeof(List<Order>));
       using (FileStream fs = new FileStream(path, FileMode.Open)) {
         List<Order> temp = (List<Order>)xs.Deserialize(fs);
@@ -148,7 +145,7 @@ namespace OrderApp {
       }
     }
 
-    public object QueryByTotalAmount(float amout) {
+        public static object QueryByTotalAmount(float amout) {
         using (var db = new MyContext())
         {
              return db.Orders

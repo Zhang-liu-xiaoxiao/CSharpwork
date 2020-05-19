@@ -15,10 +15,10 @@ namespace OrderForm {
 
     public FormEdit() {
       InitializeComponent();
-      customerBindingSource.Add(new Customer("1", "li"));
-      customerBindingSource.Add(new Customer("2", "zhang"));
-
-    }
+            CustomerService.Add(new Customer("1","zlxx1"));
+            CustomerService.Add(new Customer("2","zlxx2"));
+            customerBindingSource.DataSource = CustomerService.GetAll();
+        }
 
     public FormEdit(Order order, bool editMode = false) : this() {
       //TODO 如果想实现不点保存只关窗口后订单不变化，需要把order深克隆给CurrentOrder

@@ -97,6 +97,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomerService.cs" />
     <Compile Include="MyContext.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Goods.cs" />

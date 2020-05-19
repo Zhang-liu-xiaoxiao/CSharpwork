@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace OrderApp {
   public class Customer {
+        [Key]
     public string ID { get; set; }
     public string Name { get; set; }
 
     public Customer() {
-    }
+            ID = Guid.NewGuid().ToString();
+        }
 
-    public Customer(string iD, string name) {
-      ID = iD;
-      Name = name;
+        public Customer(String Id, string name) {
+            ID = Id;
+            Name = name;
     }
 
     public override bool Equals(object obj) {

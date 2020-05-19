@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace OrderApp {
    **/
   public class Order:IComparable<Order>{
 
-    private List<OrderItem> items;
+    public List<OrderItem> items { get; set; }
 
 
     [Key]
@@ -20,6 +21,8 @@ namespace OrderApp {
 
     public Customer Customer { get; set; }
 
+    [ForeignKey("CustomerId")]
+    public String CustomerId { get; set; }
     public string CustomerName { get=> (Customer!=null)? Customer.Name:""; }
 
     public DateTime CreateTime { get; set; }

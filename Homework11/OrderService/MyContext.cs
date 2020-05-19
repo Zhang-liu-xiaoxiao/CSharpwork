@@ -11,12 +11,13 @@ namespace OrderApp
     {
         public MyContext() : base("OrderDatabase")
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MyContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<MyContext>());
         }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Goods> Goods { get; set; }
+        public DbSet<Customer> Customers { get; set; }
     }
 
 }
