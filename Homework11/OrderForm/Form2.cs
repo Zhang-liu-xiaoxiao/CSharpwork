@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Homework8
+namespace OrderForm
 {
-    public partial class DeleteOrderForm : Form
+    public partial class Form2 : Form
     {
-        public DeleteOrderForm()
+        public Form2()
         {
             InitializeComponent();
         }

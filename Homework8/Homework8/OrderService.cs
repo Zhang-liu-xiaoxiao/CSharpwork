@@ -23,15 +23,29 @@ namespace Homework8
         }
         public void Add(Order order)
         {
-            try { orderList.Add(order); }
-            catch
-            {
-                Console.WriteLine("添加失败");
-            }
+                try { orderList.Add(order); }
+                catch
+                {
+                    Console.WriteLine("添加失败");
+                }
+            
         }
         public void Delete()
         {
             orderList.Clear();
+        }
+        public void DeleteByID(int ID)
+        {
+            Order order = SelectByNumber(ID);
+            if (order != null)
+            {
+                try
+                { orderList.Remove(order); }
+                catch
+                {
+                    Console.WriteLine("删除失败");
+                }
+            }
         }
 
         public void Export(string path)
@@ -66,11 +80,9 @@ namespace Homework8
 
         public Order SelectByNumber(int number)
         {
-            var query = from o in orderList
-                        where o.OrderNumber == number
-                        select o;
-            List<Order> orders = query.ToList();
-            return orders[0];
+            var query = orderList.Where(order => order.OrderNumber == number);
+            return query.FirstOrDefault();
+
         }
 
         public OrderService(List<Order> orders)
@@ -78,5 +90,6 @@ namespace Homework8
             orderList = orders;
         }
         public OrderService() { }
+
     }
 }

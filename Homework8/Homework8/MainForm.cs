@@ -38,7 +38,11 @@ namespace Homework8
 
         private void selectButton_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = orderService.SelectByNumber(Int32.Parse (selectText.Text)).ToString();
+
+            if (orderService.SelectByNumber(Int32.Parse(selectText.Text)) != null)
+                richTextBox1.Text = orderService.SelectByNumber(Int32.Parse(selectText.Text)).ToString();
+            else
+                richTextBox1.Text = "无此订单";
         }
 
         private void deleteButton_Click(object sender, EventArgs e)
