@@ -34,7 +34,7 @@ namespace OrderForm {
       FormItemEdit formItemEdit = new FormItemEdit(new OrderItem());
       try {
         if (formItemEdit.ShowDialog() == DialogResult.OK) {
-          uint index = 0;
+          int index = 0;
           if (CurrentOrder.Items.Count != 0) {
             index = CurrentOrder.Items.Max(i => i.Index) + 1;
           }

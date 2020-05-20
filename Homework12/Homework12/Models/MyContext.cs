@@ -1,23 +1,20 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderApp
+namespace Homework12.Models
 {
     public class MyContext : DbContext
     {
-        public MyContext() : base("OrderDatabase")
+        public MyContext(DbContextOptions<MyContext> options) : base(options)
         {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<MyContext>());
+            this.Database.EnsureCreated();
         }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Goods> Goods { get; set; }
-        public DbSet<Customer> Customers { get; set; }
     }
-
 }

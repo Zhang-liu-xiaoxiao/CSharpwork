@@ -15,7 +15,7 @@ namespace OrderApp {
         
     [Key]
     public string Id { get; set; }
-    public uint Index { get; set; } //序号
+    public int Index { get; set; } //序号
 
     public Goods GoodsItem { get; set; }
 
@@ -26,11 +26,11 @@ namespace OrderApp {
     public double UnitPrice { get => GoodsItem != null ? this.GoodsItem.Price : 0.0; }
 
     public string OrderId { get; set; }
-    public uint Quantity { get; set; }
+    public int Quantity { get; set; }
 
     public OrderItem() { }
 
-    public OrderItem(uint index, Goods goods, uint quantity) {
+    public OrderItem(int index, Goods goods,int quantity) {
       this.Index = index;
       this.GoodsItem = goods;
       this.Quantity = quantity;
