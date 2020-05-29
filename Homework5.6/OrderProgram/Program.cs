@@ -10,7 +10,7 @@ namespace OrderProgram
     [Serializable]
     public class Order:IComparable<Order>
     {
-       
+       //
         public int OrderNumber { get; set; }
         public String ClientName { get; set; }
 
