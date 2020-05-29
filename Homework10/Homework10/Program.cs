@@ -21,6 +21,7 @@ namespace Homework10
         public string startUrl = "";
         private int count = 0;
         private int max = 100;
+
         static void Main(string[] args)
         {
             SimpleCrawler myCrawler = new SimpleCrawler();
