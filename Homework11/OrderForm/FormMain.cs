@@ -24,6 +24,7 @@ namespace OrderForm {
         order.AddItem(new OrderItem(1, new Goods("2", "egg", 50.0), 61));
 
         OrderService.AddOrder(order);
+
           
             List<Order> orders = OrderService.GetOrders();
 

@@ -14,6 +14,7 @@ namespace OrderApp
             {
                 db.Customers.Add(customer);
                 db.SaveChanges();
+
             }
         }
 
